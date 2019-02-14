@@ -18,7 +18,7 @@ namespace Codecov.Upload
 
         protected override string Post()
         {
-            Log.Verboase("Trying to upload using WebClient.");
+            Log.Verbose("Trying to upload using WebClient.");
 
             var client = new System.Net.WebClient();
             client.Headers.Add("X-Content-Type", "application/x-gzip");

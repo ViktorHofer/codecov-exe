@@ -16,7 +16,7 @@ namespace Codecov.Tests.Coverage.Report
         {
             // Given
             var enviornmentVariables = Substitute.For<IEnviornmentVariables>();
-            enviornmentVariables.GetEnviornmentVariables.Returns(new Dictionary<string, string> { { "foo", "bar" }, { "fizz", "bizz" } });
+            enviornmentVariables.GetEnvironmentVariables.Returns(new Dictionary<string, string> { { "foo", "bar" }, { "fizz", "bizz" } });
             var options = Substitute.For<IReportOptions>();
             options.DisableNetwork = false;
             var sourceCode = Substitute.For<ISourceCode>();
@@ -38,7 +38,7 @@ namespace Codecov.Tests.Coverage.Report
         {
             // Given
             var enviornmentVariables = Substitute.For<IEnviornmentVariables>();
-            enviornmentVariables.GetEnviornmentVariables.Returns(new Dictionary<string, string> { { "foo", "bar" }, { "fizz", "bizz" } });
+            enviornmentVariables.GetEnvironmentVariables.Returns(new Dictionary<string, string> { { "foo", "bar" }, { "fizz", "bizz" } });
             var options = Substitute.For<IReportOptions>();
             options.DisableNetwork = true;
             var sourceCode = Substitute.For<ISourceCode>();

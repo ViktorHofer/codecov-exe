@@ -107,7 +107,7 @@ namespace Codecov.Tests.Services.ContiniousIntegrationServers
             var continuousIntegrationServer = new ContinuousIntegrationServer();
 
             // When
-            var enviornmentVariables = continuousIntegrationServer.GetEnviornmentVariables;
+            var enviornmentVariables = continuousIntegrationServer.GetEnvironmentVariables;
 
             // Then
             enviornmentVariables.Should().BeEmpty();

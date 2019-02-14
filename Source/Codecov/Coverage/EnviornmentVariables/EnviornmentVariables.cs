@@ -6,50 +6,50 @@ namespace Codecov.Coverage.EnviornmentVariables
 {
     internal class EnviornmentVariables : IEnviornmentVariables
     {
-        private readonly Lazy<IDictionary<string, string>> _getEnviornmentVariables;
+        private readonly Lazy<IDictionary<string, string>> _getEnvironmentVariables;
 
         public EnviornmentVariables(IEnviornmentVariablesOptions options, IContinuousIntegrationServer continuousIntegrationServer)
         {
             Options = options;
             ContinuousIntegrationServer = continuousIntegrationServer;
-            _getEnviornmentVariables = new Lazy<IDictionary<string, string>>(LoadEnviornmentVariables);
+            _getEnvironmentVariables = new Lazy<IDictionary<string, string>>(LoadEnvironmentVariables);
         }
 
-        public IDictionary<string, string> GetEnviornmentVariables => _getEnviornmentVariables.Value;
+        public IDictionary<string, string> GetEnvironmentVariables => _getEnvironmentVariables.Value;
 
         private IContinuousIntegrationServer ContinuousIntegrationServer { get; }
 
         private IEnviornmentVariablesOptions Options { get; }
 
-        private IDictionary<string, string> LoadEnviornmentVariables()
+        private IDictionary<string, string> LoadEnvironmentVariables()
         {
-            var enviornmentVariables = new Dictionary<string, string>(ContinuousIntegrationServer.GetEnviornmentVariables);
+            var environmentVariables = new Dictionary<string, string>(ContinuousIntegrationServer.GetEnvironmentVariables);
 
             const string codecovName = "CODECOV_ENV";
             var codecovValue = Environment.GetEnvironmentVariable(codecovName);
-            if (!string.IsNullOrWhiteSpace(codecovValue) && !enviornmentVariables.ContainsKey(codecovName))
+            if (!string.IsNullOrWhiteSpace(codecovValue) && !environmentVariables.ContainsKey(codecovName))
             {
-                enviornmentVariables[codecovName] = codecovValue;
+                environmentVariables[codecovName] = codecovValue;
             }
 
-            var enviornmentVariableNames = Options.Envs;
-            foreach (var enviornmentVariableName in enviornmentVariableNames)
+            var environmentVariableNames = Options.Envs;
+            foreach (var environmentVariableName in environmentVariableNames)
             {
-                if (enviornmentVariables.ContainsKey(enviornmentVariableName))
+                if (environmentVariables.ContainsKey(environmentVariableName))
                 {
                     continue;
                 }
 
-                var value = Environment.GetEnvironmentVariable(enviornmentVariableName);
+                var value = Environment.GetEnvironmentVariable(environmentVariableName);
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     continue;
                 }
 
-                enviornmentVariables[enviornmentVariableName] = Environment.GetEnvironmentVariable(enviornmentVariableName);
+                environmentVariables[environmentVariableName] = value;
             }
 
-            return enviornmentVariables;
+            return environmentVariables;
         }
     }
 }

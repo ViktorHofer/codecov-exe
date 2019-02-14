@@ -5,8 +5,8 @@ namespace Codecov.Services.ContinuousIntegrationServers
 {
     internal class TeamCity : ContinuousIntegrationServer
     {
-        private readonly Lazy<string> _branch = new Lazy<string>(() => EnviornmentVariable.GetEnviornmentVariable("TEAMCITY_BUILD_BRANCH"));
-        private readonly Lazy<string> _build = new Lazy<string>(() => EnviornmentVariable.GetEnviornmentVariable("TEAMCITY_BUILD_ID"));
+        private readonly Lazy<string> _branch = new Lazy<string>(() => EnviornmentVariable.GetEnvironmentVariable("TEAMCITY_BUILD_BRANCH"));
+        private readonly Lazy<string> _build = new Lazy<string>(() => EnviornmentVariable.GetEnvironmentVariable("TEAMCITY_BUILD_ID"));
         private readonly Lazy<string> _buildUrl = new Lazy<string>(LoadBuildUrl);
         private readonly Lazy<string> _commit = new Lazy<string>(LoadCommit);
         private readonly Lazy<bool> _detecter = new Lazy<bool>(LoadDetecter);
@@ -28,25 +28,25 @@ namespace Codecov.Services.ContinuousIntegrationServers
 
         private static string LoadBuildUrl()
         {
-            var buildUrl = EnviornmentVariable.GetEnviornmentVariable("TEAMCITY_BUILD_URL");
+            var buildUrl = EnviornmentVariable.GetEnvironmentVariable("TEAMCITY_BUILD_URL");
             return !string.IsNullOrWhiteSpace(buildUrl) ? Uri.EscapeDataString(buildUrl) : string.Empty;
         }
 
         private static string LoadCommit()
         {
-            var commit = EnviornmentVariable.GetEnviornmentVariable("TEAMCITY_BUILD_COMMIT");
-            return !string.IsNullOrWhiteSpace(commit) ? commit : EnviornmentVariable.GetEnviornmentVariable("BUILD_VCS_NUMBER");
+            var commit = EnviornmentVariable.GetEnvironmentVariable("TEAMCITY_BUILD_COMMIT");
+            return !string.IsNullOrWhiteSpace(commit) ? commit : EnviornmentVariable.GetEnvironmentVariable("BUILD_VCS_NUMBER");
         }
 
         private static bool LoadDetecter()
         {
-            var teamCity = EnviornmentVariable.GetEnviornmentVariable("TEAMCITY_VERSION");
+            var teamCity = EnviornmentVariable.GetEnvironmentVariable("TEAMCITY_VERSION");
             return !string.IsNullOrWhiteSpace(teamCity);
         }
 
         private static string LoadSlug()
         {
-            var buildRepository = EnviornmentVariable.GetEnviornmentVariable("TEAMCITY_BUILD_REPOSITORY");
+            var buildRepository = EnviornmentVariable.GetEnvironmentVariable("TEAMCITY_BUILD_REPOSITORY");
             if (string.IsNullOrWhiteSpace(buildRepository))
             {
                 return string.Empty;

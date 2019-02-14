@@ -18,7 +18,7 @@ namespace Codecov.Upload
 
         protected override string Post()
         {
-            Log.Verboase("Trying to upload using HttpWebRequest.");
+            Log.Verbose("Trying to upload using HttpWebRequest.");
 
             var postRequest = (System.Net.HttpWebRequest)WebRequest.Create(Url.GetUrl);
             postRequest.Method = "POST";

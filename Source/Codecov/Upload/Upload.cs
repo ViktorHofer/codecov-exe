@@ -28,14 +28,14 @@ namespace Codecov.Upload
                 var response = Post();
                 if (string.IsNullOrWhiteSpace(response))
                 {
-                    Log.Verboase("Failed to ping codecov.");
+                    Log.Verbose("Failed to ping codecov.");
                     return string.Empty;
                 }
 
                 var s3 = GetPutUrlFromPostResponse(response);
                 if (!Put(s3))
                 {
-                    Log.Verboase("Failed to upload the report.");
+                    Log.Verbose("Failed to upload the report.");
                     return string.Empty;
                 }
 
@@ -43,7 +43,7 @@ namespace Codecov.Upload
             }
             catch (Exception ex)
             {
-                Log.VerboaseException(ex);
+                Log.VerboseException(ex);
                 return string.Empty;
             }
         }

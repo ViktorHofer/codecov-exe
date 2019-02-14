@@ -98,10 +98,10 @@ namespace Codecov.Program
             Log.Information("Reading reports.");
             Log.Information(string.Join("\n", Coverage.CoverageReports.Select(x => x.File)));
 
-            if (EnviornmentVariables.GetEnviornmentVariables.Any())
+            if (EnviornmentVariables.GetEnvironmentVariables.Any())
             {
                 Log.Information("Appending build variables");
-                Log.Information(string.Join("\n", EnviornmentVariables.GetEnviornmentVariables.Select(x => x.Key.Trim()).ToArray()));
+                Log.Information(string.Join("\n", EnviornmentVariables.GetEnvironmentVariables.Select(x => x.Key.Trim()).ToArray()));
             }
 
             if (CommandLineCommandLineOptions.Dump)
@@ -114,12 +114,12 @@ namespace Codecov.Program
 
             Log.Information("Uploading Reports.");
             Log.Information($"url: {Url.GetUrl.Scheme}://{Url.GetUrl.Authority}");
-            Log.Verboase($"api endpoint: {Url.GetUrl}");
+            Log.Verbose($"api endpoint: {Url.GetUrl}");
             Log.Information($"query: {DisplayUrl}");
             Log.Information("Pinging Codecov");
 
             var response = Upload.Uploader();
-            Log.Verboase($"response: {response}");
+            Log.Verbose($"response: {response}");
             var splitResponse = response.Split('\n');
             var s3 = new Uri(splitResponse[1]);
             var reportUrl = splitResponse[0];
