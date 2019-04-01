@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
-        <CodeAnalysisRuleSet>.\Codecov.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
         <PackageId>Codecov.Tool</PackageId>
         <ToolCommandName>codecov</ToolCommandName>
         <PackAsTool>true</PackAsTool>
